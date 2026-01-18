@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUBTEXT | Corporate Video, 3D Animation &amp; AI Studio – India</title>
+    <meta name="description" content="High-end corporate videos, 3D animation, AI-driven visuals and cinematic storytelling for brands and agencies across India and global markets.">
+
+    <!-- Social preview (update og:url/og:image to absolute URLs once deployed) -->
+    <meta property="og:title" content="SUBTEXT | Corporate Video, 3D Animation &amp; AI Studio – India">
+    <meta property="og:description" content="High-end corporate videos, 3D animation, AI-driven visuals and cinematic storytelling for brands and agencies across India and global markets.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/thumbnails/Branded/Showreel.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SUBTEXT | Corporate Video, 3D Animation &amp; AI Studio – India">
+    <meta name="twitter:description" content="High-end corporate videos, 3D animation, AI-driven visuals and cinematic storytelling for brands and agencies across India and global markets.">
+    <meta name="twitter:image" content="assets/thumbnails/Branded/Showreel.jpg">
+
+    <!-- Favicon --><link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Header with huge top margin */
+        .site-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 0;
+            margin: 0 auto;
+            max-width: 100%;
+            padding-left: 70px;
+            padding-right: 70px;
+            background: #000000;
+        }
+
+        .site-logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-logo img {
+            height: 450px;
+            width: auto;
+            display: block;
+            margin-bottom: -200px;
+            transform: translateY(-60px) translateX(-130px);
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 55px;
+            padding-top: 10px;
+        }
+
+        .site-nav a {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .site-nav a:hover {
+            opacity: 0.7;
+        }
+
+        .site-nav a.active {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin: 0 auto;
+            max-width: 100%;
+            padding-left: 70px;
+            padding-right: 70px;
+            padding-top: -50px;
+            padding-bottom: 80px;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .category-left {
+            display: flex;
+            gap: 55px;
+        }
+
+        .category-btn {
+            background: none;
+            border: none;
+            color: #aaaaaa;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.3s ease;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Video Grid - Single column full width */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+
+        .video-item {
+            display: block;
+        }
+
+        .video-item.hidden {
+            display: none;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #1a1a1a;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .video-thumbnail:hover img {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid rgba(255, 255, 255, 0.9);
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 8px;
+        }
+
+        .video-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .video-tags {
+            font-size: 14px;
+            color: #aaaaaa;
+            line-height: 1.5;
+        }
+
+        /* About Section */
+        .about-section {
+            margin: 0 auto;
+            max-width: 100%;
+            padding: 80px 30px;
+            border-top: 1px solid #333;
+        }
+
+        .about-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        .about-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #cccccc;
+            max-width: 800px;
+        }
+
+        .about-text a {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin: 0 auto;
+            max-width: 100%;
+            padding: 40px 30px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 55px;
+        }
+
+        .footer-links a {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-close::before,
+        .modal-close::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 2px;
+            background: #ffffff;
+        }
+
+        .modal-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .modal-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Mobile Navigation Toggle */
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            display: none;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            /* Mobile Header - reduced padding for full-width mobile view */
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-top: 0;
+                padding-left: 20px;
+                padding-right: 20px;
+                gap: 30px;
+            }
+
+            .site-logo img {
+                height: 320px;
+                transform: translateY(-75px) translateX(-90px);
+            }
+
+            /* Mobile content - reduced padding for full-width */
+            .main-content {
+                padding: 20px 20px 60px;
+            }
+
+            /* 1 column - full width on mobile */
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            /* Mobile filter - 5 equal columns (ALL / AUTOMOTIVE / BRANDED / PREVIZ / INFO) */
+            html, body { overflow-x: hidden; }
+
+            .category-filter {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                align-items: center;
+                column-gap: 6px;
+                margin-bottom: 40px;
+                padding-bottom: 10px;
+            }
+
+            /* Flatten the left group so its buttons become direct grid items */
+            .category-left { display: contents; }
+
+            .category-btn {
+                font-size: 11px;
+                letter-spacing: 0.03em;
+                white-space: nowrap;
+                padding: 0;
+                margin: 0;
+                text-align: center;
+                justify-self: center;
+            }
+
+            /* Mobile about - reduced padding */
+            .about-section {
+                padding: 60px 20px;
+            }
+
+            /* Mobile footer */
+            .site-footer {
+                padding: 40px 20px;
+            }
+
+            .footer-content {
+                flex-direction: row;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .footer-links {
+                flex-wrap: nowrap;
+                gap: 30px;
+            }
+        }
+    
+/* Fix: ensure header logo does not block menu clicks */
+.site-logo img{pointer-events:none;}
+.main-content,.category-filter{position:relative;z-index:5;}
+
+
+/* === MOBILE ONLY: Align menu with logo left edge + keep single-row, no horizontal scroll === */
+@media (max-width: 768px){
+  /* Keep logo + menu sharing the same left edge */
+  .site-header{
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  .site-logo{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+  }
+
+  /* Menu: single row, aligned left, no overflow; ensure visible gap between labels */
+  .category-filter{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    overflow-x: hidden !important;
+    white-space: nowrap !important;
+  }
+  .category-left{
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  .category-filter .category-btn{
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+  }
+  /* Push INFO to the far right */
+  .category-filter > .category-btn{
+    margin-left: auto !important;
+  }
+}
+
+
+
+/* === Play overlay animation (keeps existing hover scale unchanged) === */
+.video-thumbnail{
+  position: relative;
+  overflow: hidden;
+}
+
+.video-thumbnail .play-button{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0.85;
+  transition: opacity 180ms ease, transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
+  will-change: transform, opacity;
+}
+
+/* Gentle emphasis on hover/focus (image hover scale stays as-is) */
+.video-item:hover .video-thumbnail .play-button,
+.video-thumbnail:focus-within .play-button{
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.06);
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+}
+
+/* Subtle pulse ring */
+@keyframes playPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.22); }
+  70%  { box-shadow: 0 0 0 14px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+.video-item:hover .video-thumbnail .play-button,
+.video-thumbnail:focus-within .play-button{
+  animation: playPulse 900ms ease-out 1;
+}
+
+/* Mobile tap feedback */
+@media (hover: none) and (pointer: coarse){
+  .video-thumbnail:active .play-button{
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.06);
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+  }
+}
+
+
+/* === Category transition fade === */
+.video-item{
+  transition: opacity 220ms ease, transform 220ms ease;
+  will-change: opacity, transform;
+}
+
+.video-item.hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Slight stagger feel when showing */
+.video-item{
+  opacity: 1;
+}
+
+
+/* === Category transition fade (container-based, keeps filtering logic stable) === */
+.video-grid{
+  transition: opacity 243ms ease;
+}
+.video-grid.is-fading{
+  opacity: 0.0;
+}
+
+
+/* === SEO helpers (visually hidden headings) === */
+.sr-only{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <a href="#" class="site-logo">
+            <img src="Subtext logo.png" alt="SUBTEXT">
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+            <h1 class="sr-only">Corporate Video, 3D Animation &amp; AI Studio — Subtext</h1>
+        <!-- Work Section -->
+        <section id="work">
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <div class="category-left">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="automotive">Automotive</button>
+                    <button class="category-btn" data-category="branded">Branded</button>
+                    <button class="category-btn" data-category="previz">Previz</button>
+                </div>
+                <button class="category-btn" data-category="info">Info</button>
+            </div>
+            
+                        <h2 class="sr-only">Branded Films</h2>
+            <h2 class="sr-only">Previz / Animatics</h2>
+            <h2 class="sr-only">Automotive Films</h2>
+            <div class="video-grid">
+                <!-- BRANDED VIDEOS -->
+
+                <!-- Video 1 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('1154657465')">
+                        <img src="assets/thumbnails/Branded/Samsung-AI-Health.jpg" alt="Samsung Wellness CGI Video — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Samsung Wellness CGI Video</h3>
+                    <p class="video-tags">Storyboard, Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 2 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('824724128')">
+                        <img src="assets/thumbnails/Branded/Samsung-Habit-Tracking.jpg" alt="Samsung Habit Tracking CGI Video — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Samsung Habit Tracking CGI Video</h3>
+                    <p class="video-tags">Storyboard, Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 3 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('1066087540')">
+                        <img src="assets/thumbnails/Branded/Showreel.jpg" alt="Showreel — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Showreel</h3>
+                    <p class="video-tags">Cinematography, Motion Graphics, 3D Animation, Post</p>
+                </article>
+
+                <!-- Video 4 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('824720254')">
+                        <img src="assets/thumbnails/Branded/LeCercle-Website-Demo.jpg" alt="LeCercle Website Demo — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">LeCercle Website Demo</h3>
+                    <p class="video-tags">Pre-production, Cinematography, Motion Graphics</p>
+                </article>
+
+                <!-- Video 5 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('509167147')">
+                        <img src="assets/thumbnails/Branded/RSBS1.jpg" alt="Royal Stag Barrel Select Flavours — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Royal Stag Barrel Select Flavours</h3>
+                    <p class="video-tags">Pre-production, Cinematography, Motion Graphics, Post</p>
+                </article>
+
+                <!-- Video 6 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('509165645')">
+                        <img src="assets/thumbnails/Branded/RSBS-New-Pack.jpg" alt="Royal Stag Barrel Select Limited Edition Pack — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Royal Stag Barrel Select Limited Edition Pack</h3>
+                    <p class="video-tags">Pre-production, Cinematography, Motion Graphics, Post</p>
+                </article>
+
+                <!-- Video 7 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('509164449')">
+                        <img src="assets/thumbnails/Branded/RSBS2.jpg" alt="Royal Stag Barrel Select Taste Matters — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Royal Stag Barrel Select Taste Matters</h3>
+                    <p class="video-tags">Pre-production, Cinematography, Motion Graphics, Post</p>
+                </article>
+
+                <!-- Video 8 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('377967528')">
+                        <img src="assets/thumbnails/Branded/RS-world-packaging.jpg" alt="Royal Stag Global Pack Reveal — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Royal Stag Global Pack Reveal</h3>
+                    <p class="video-tags">Pre-production, Cinematography, Motion Graphics, Post</p>
+                </article>
+
+                <!-- Video 9 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('372871788')">
+                        <img src="assets/thumbnails/Branded/Rani.jpg" alt="Rani Float Launch Promo — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Rani Float Launch Promo</h3>
+                    <p class="video-tags">3D Animation, Motion Graphics, Post</p>
+                </article>
+
+                <!-- Video 10 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('824719200')">
+                        <img src="assets/thumbnails/Branded/Samsung-smart-tv.jpg" alt="Samsung Smart TV CGI Video — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Samsung Smart TV CGI Video</h3>
+                    <p class="video-tags">Storyboard, 3D Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 11 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('643019684')">
+                        <img src="assets/thumbnails/Branded/Samsung-NUI.jpg" alt="Samsung NUI CGI Video — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Samsung NUI CGI Video</h3>
+                    <p class="video-tags">Storyboard, 3D Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 12 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('571203261')">
+                        <img src="assets/thumbnails/Branded/Samsung-Grande.jpg" alt="Samsung Grande Washing Machine CGI Video — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Samsung Grande Washing Machine CGI Video</h3>
+                    <p class="video-tags">Storyboard, 3D Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 13 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('252143163')">
+                        <img src="assets/thumbnails/Branded/Maxima.jpg" alt="Maxima Chronograph — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Maxima Chronograph</h3>
+                    <p class="video-tags">Storyboard, 3D Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 14 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('170438065')">
+                        <img src="assets/thumbnails/Branded/DIscoveryJune.jpg" alt="Discovery Channel June Highlights Promo — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Discovery Channel June Highlights Promo</h3>
+                    <p class="video-tags">Storyboard, Direction, Motion Graphics</p>
+                </article>
+
+                <!-- Video 15 - Branded -->
+                <article class="video-item" data-category="branded">
+                    <div class="video-thumbnail" onclick="openModal('174458227')">
+                        <img src="assets/thumbnails/Branded/DIscoveryHTW.jpg" alt="Discovery Science How Things Work Promo — corporate video, 3D animation and AI-driven visuals by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Discovery Science How Things Work Promo</h3>
+                    <p class="video-tags">Storyboard, Direction, Motion Graphics</p>
+                </article>
+
+                <!-- PREVIZ VIDEOS -->
+
+                <!-- Video 1 - Previz -->
+                <article class="video-item" data-category="previz">
+                    <div class="video-thumbnail" onclick="openModal('1058575314')">
+                        <img src="assets/thumbnails/Previz/3danimatics.jpg" alt="3D Animatics Showreel — previz and 3D animatics by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">3D Animatics Showreel</h3>
+                    <p class="video-tags">Storyboard, 3D Animation, Post</p>
+                </article>
+
+                <!-- AUTOMOTIVE VIDEOS -->
+
+                <!-- Video 1 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('1035638289')">
+                        <img src="assets/thumbnails/Automotive/Auto-Reel.jpg" alt="Showreel — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Showreel</h3>
+                    <p class="video-tags">Storyboard, Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 2 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('1155469167')">
+                        <img src="assets/thumbnails/Automotive/Lectrix-Launch.jpg" alt="Lectrix Mobility CGI Video — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Lectrix Mobility CGI Video</h3>
+                    <p class="video-tags">Storyboard, Animation, Direction, Post</p>
+                </article>
+
+                <!-- Video 3 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('1152101007')">
+                        <img src="assets/thumbnails/Automotive/Anand-Auto-SNS-Founation.jpg" alt="Anand Auto SNSF — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Anand Auto SNSF</h3>
+                    <p class="video-tags">Cinematography, Motion Graphics</p>
+                </article>
+
+                <!-- Video 4 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('332645157')">
+                        <img src="assets/thumbnails/Automotive/Anand-Auto-Corporate-Video.jpg" alt="Anand Auto Corporate Video — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Anand Auto Corporate Video</h3>
+                    <p class="video-tags">Scriptwriting, Cinematorgraphy, Direction, Animation &amp; Postproduction</p>
+                </article>
+
+                <!-- Video 5 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('1152169184')">
+                        <img src="assets/thumbnails/Automotive/Lumax-Brand-Video.jpg" alt="Lumax Brand Video — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Lumax Brand Video</h3>
+                    <p class="video-tags">Scriptwriting, Cinematorgraphy, Direction, Animation &amp; Postproduction</p>
+                </article>
+
+                <!-- Video 6 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('1152171326')">
+                        <img src="assets/thumbnails/Automotive/Lumax-Cornaglia.jpg" alt="Lumax Cornaglia Showcase — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Lumax Cornaglia Showcase</h3>
+                    <p class="video-tags">Scriptwriting, Cinematorgraphy, Direction, Animation &amp; Postproduction</p>
+                </article>
+
+                <!-- Video 7 - Automotive -->
+                <article class="video-item" data-category="automotive">
+                    <div class="video-thumbnail" onclick="openModal('1152176359')">
+                        <img src="assets/thumbnails/Automotive/LIL-Chakan-Plant-Showcase.jpg" alt="Lumax Chakan Showcase — automotive corporate video and 3D animation by SUBTEXT India">
+                        <div class="play-button"></div>
+                    </div>
+                    <h3 class="video-title">Lumax Chakan Showcase</h3>
+                    <p class="video-tags">Scriptwriting, Cinematorgraphy, Direction, Animation &amp; Postproduction</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2 class="about-title">INFO</h2>
+        <div class="about-text">
+            <p>We help organisations present their brands, products, and capabilities to a global audience through corporate films and visual storytelling—supporting OEM engagement, trade shows, and brand platforms. We're a team of storytellers and creatives who fuse 3D motion design with film craft and AI to create content that's imaginative, innovative and impactful. We create emotionally engaging, design-led work for every type of screen  and platform. Blending artistry with emerging techniques, we seek to make smarter content for some of the best brands out there. </p>
+            <p>Contact Kabir at <a href="tel:+919810768263">+91-9810768263</a>. <a href="mailto:kabir@subtext.co.in">kabir@subtext.co.in</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <button class="modal-close" onclick="closeModal()"></button>
+        <div class="modal-content">
+            <iframe id="modalIframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        
+        
+        // Category Filtering (robust + fade transition)
+        const categoryFilter = document.querySelector('.category-filter');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const videoGrid = document.querySelector('.video-grid');
+        const videos = () => document.querySelectorAll('.video-item');
+
+        function normalizeCategory(cat) {
+            return String(cat || '').trim().toLowerCase();
+        }
+
+        function applyCategory(category) {
+            const cat = normalizeCategory(category);
+
+            // Info button scrolls to about section
+            if (cat === 'info') {
+                const about = document.getElementById('about');
+                if (about) about.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            const activeBtn = Array.from(categoryBtns).find(b => normalizeCategory(b.dataset.category) === cat);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Fade container out, switch, then fade in
+            if (videoGrid) videoGrid.classList.add('is-fading');
+
+            setTimeout(() => {
+                videos().forEach(video => {
+                    const videoCat = normalizeCategory(video.dataset.category);
+                    const show = (cat === 'all') || (videoCat === cat);
+                    video.classList.toggle('hidden', !show);
+                });
+                // next frame: remove fading class to transition back in
+                requestAnimationFrame(() => {
+                    if (videoGrid) videoGrid.classList.remove('is-fading');
+                });
+            }, 160);
+        }
+
+        // Delegate clicks so it keeps working even if layout changes
+        if (categoryFilter) {
+            categoryFilter.addEventListener('click', (e) => {
+                const btn = e.target.closest('.category-btn');
+                if (!btn) return;
+                e.preventDefault();
+                e.stopPropagation();
+                applyCategory(btn.dataset.category);
+            });
+        } else {
+            // Fallback: direct listeners
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    applyCategory(btn.dataset.category);
+                });
+            });
+        }
+
+
+
+        
+
+        // Video Modal
+        function openModal(videoId) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on background click
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('videoModal')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
