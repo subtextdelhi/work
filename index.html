@@ -203,13 +203,15 @@
         .video-title {
             font-size: 24px;
             font-weight: 600;
-            margin-bottom: 10px;
+            line-height: 1.12;      /* tighter leading */
+            margin-bottom: 4px;      /* less gap above tags */
         }
 
         .video-tags {
             font-size: 14px;
             color: #aaaaaa;
-            line-height: 1.5;
+            line-height: 1.25;       /* tighter leading */
+            margin-top: 0;
         }
 
         /* About Section */
@@ -406,6 +408,15 @@
                 flex-wrap: nowrap;
                 gap: 30px;
             }
+            /* Tighter leading for titles/tags on mobile (especially when title wraps) */
+            .video-title {
+                line-height: 1.08;
+                margin-bottom: 4px;
+            }
+            .video-tags {
+                line-height: 1.18;
+            }
+
         }
     
 /* Fix: ensure header logo does not block menu clicks */
